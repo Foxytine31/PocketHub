@@ -19,6 +19,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.app.ActionBar;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -241,6 +242,8 @@ public class IssueFragment extends DialogFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        setupToolbar();
+
         list = finder.find(android.R.id.list);
         progress = finder.find(R.id.pb_loading);
 
@@ -400,6 +403,15 @@ public class IssueFragment extends DialogFragment {
         ViewUtils.setGone(progress, true);
         ViewUtils.setGone(list, false);
         updateStateItem(issue);
+    }
+
+    private void setupToolbar() {
+        final BaseActivity activity = (BaseActivity) getActivity();
+        final ActionBar actionBar = activity.getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setIcon(null);
+            actionBar.setSubtitle(null);
+        }
     }
 
     private void refreshIssue() {
